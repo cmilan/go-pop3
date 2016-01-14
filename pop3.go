@@ -224,12 +224,12 @@ func (c *Client) ListAll() (list []MessageList, err error) {
 }
 
 // Retr downloads the given message and returns it as a mail.Message object.
-func (c *Client) Retr(msg int) (m *mail.Message, err error) {
+func (c *Client) Retr(msg int) (m string, err error) {
 	if _, err = c.Cmd("%s %s\r\n", RETR, msg); err != nil {
 		return
 	}
 
-	m, err = mail.ReadMessage(c.r)
+	m, err = c.r
 	if err != nil {
 		return
 	}
